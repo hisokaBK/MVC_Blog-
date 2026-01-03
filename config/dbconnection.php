@@ -1,7 +1,9 @@
 <?php
-    class Database {
+
+
+class Database {
     private static string $host = "localhost";
-    private static string $db   = "Bibliotheque";
+    private static string $db   = "blog_mvc";
     private static string $user = "root";
     private static string $pass = "bilal@12131414@";
     private static string $charset = "utf8mb4";
