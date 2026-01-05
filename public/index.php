@@ -1,3 +1,12 @@
 <?php
 
-   require "../routes/web.php";?>
+require_once __DIR__ . '/../bootstrap/autoload.php';
+
+use App\Core\Router;
+
+session_start();
+
+$router = new Router();
+$router->get('/', "HomeController@index");
+// $router->get("/books", "BookController@home");
+$router->dispatch();
