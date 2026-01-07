@@ -3,6 +3,11 @@
 namespace app\controllers;
 
 class LikeController {
+    public $data ;
+    function __construct(){
+
+        $this->data=["title"=>"gooo"];
+    }
      public function like(){
         echo "echo echo echo ";
     }
