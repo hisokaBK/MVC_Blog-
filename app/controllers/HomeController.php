@@ -1,10 +1,9 @@
 <?php 
 
-namespace App\Controllers;
+namespace app\controllers;
+use app\core\controller;
 
-use App\Core\Controller;
-
-class HomeController extends Controller{
+class HomeController extends controller{
     public function index(){
         $this->view('home', [
             'title' => 'Welcome to Mini MVC'

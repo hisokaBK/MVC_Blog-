@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'App\\'  => dirname(__DIR__) . '/app/',
+    'app\\'  => dirname(__DIR__) . '/app/'
 ];

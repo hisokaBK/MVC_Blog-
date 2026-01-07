@@ -1,20 +1,14 @@
 <?php
 
-namespace App\Core;
+namespace app\Core;
 
 class Controller
 {
     protected function view(string $view, array $data = [])
     {
-        extract($data);
-        // $viewFile = __DIR__ . '/../views/pages/' . $view . '.php';
-        // $layoutFile = __DIR__ . '/../Views/layouts/main.php';
+        var_dump(extract($data)) ;
 
-        // if (!file_exists($viewFile)) {
-        //     throw new \Exception("View $view not found");
-        // }
-
-        // require $layoutFile;
+        var_dump($data)  ;
 
         require  __DIR__ . '/../views/pages/' . $view . '.php';
     }

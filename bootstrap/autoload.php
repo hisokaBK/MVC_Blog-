@@ -5,7 +5,7 @@ $prefixes = require __DIR__ . '/path.php';
 spl_autoload_register(function (string $class) use ($prefixes) {
 
     foreach ($prefixes as $prefix => $baseDir) {
-
+          
         if (!str_starts_with($class, $prefix)) {
             continue;
         }
