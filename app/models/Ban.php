@@ -1,14 +1,12 @@
 <?php 
-
+namespace app\models;
 class Ban
 {
-    private int $id;
     private int $userId;
     private string $reason;
     private string $bannedAt;
 
-  public function __construct(int $id,int $userId,string $reason,string $bannedAt){
-        $this->id          = $id;
+  public function __construct(int $userId,string $reason,string $bannedAt){
         $this->userId      = $userId;
         $this->reason      = $reason;
         $this->bannedAt    = $bannedAt;

@@ -8,5 +8,6 @@ class Controller
     {
 
         require  __DIR__ . '/../views/pages/' . $view . '.php';
+       
     }
 }

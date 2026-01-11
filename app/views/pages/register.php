@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Internal Blog - Register</title>
+    <title><?= $data['title'] ?></title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -34,48 +34,63 @@
 
 <body class="font-display bg-background-dark min-h-screen flex flex-col text-white">
 
-<header class="flex items-center gap-4 border-b border-[#362447] px-6 py-4">
-    <span class="material-symbols-outlined text-primary text-[36px]">auto_stories</span>
-    <h2 class="text-lg font-bold">Internal Blog</h2>
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-[#362447] px-6 lg:px-10 py-4 bg-white dark:bg-background-dark z-10">
+    <div class="flex items-center w-[100%] gap-4">
+        <div class="flex justify-between w-[100%]">
+            <h2 class="text-slate-900 first-letter:text-purple-300 first-letter:text-3xl first-letter:font-thin dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">
+                <a href="/">Blog</a>
+            </h2>
+
+            <?= isset($_SESSION['error']) 
+                ? "<p class='text-red-500 border border-red-400 rounded-lg py-2 px-4'>{$_SESSION['error']}</p>" 
+                : "" ?>
+
+            <h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">
+                <a href="/" class="hover:text-primary">✕</a>
+            </h2>
+        </div>
+    </div>
 </header>
 
 <main class="flex-grow flex items-center justify-center p-4">
     <div class="w-full max-w-[480px] flex flex-col gap-6">
-        
 
         <div class="text-center">
             <h1 class="text-3xl font-bold">Create Account</h1>
             <p class="text-text-muted mt-2">Register to access the internal blog</p>
         </div>
 
-        <div>
-    <label class="font-medium">Profile Image</label>
+        <form action="/register" method="post" enctype="multipart/form-data"
+              class="bg-[#231a2e] rounded-xl border border-[#362447] p-6 flex flex-col gap-5">
 
-    <div class="mt-1 flex items-center gap-4">
-        <div class="w-16 h-16 rounded-full bg-input-dark flex items-center justify-center overflow-hidden border border-[#362447]">
-            <img id="preview" class="hidden w-full h-full object-cover"/>
-            <span id="icon" class="material-symbols-outlined text-text-muted">
-                person
-            </span>
-        </div>
+            <div>
+                <label class="font-medium">Profile Image</label>
+                <div class="mt-1 flex items-center gap-4">
+                    <div class="w-16 h-16 rounded-full bg-input-dark flex items-center justify-center overflow-hidden border border-[#362447]">
+                        <img id="preview" class="hidden w-full h-full object-cover"/>
+                        <span id="icon" class="material-symbols-outlined text-text-muted">
+                            person
+                        </span>
+                    </div>
 
-        <input
-            type="file"
-            accept="image/*"
-            class="block w-full text-sm text-text-muted
-                   file:mr-4 file:py-2 file:px-4
-                   file:rounded-lg file:border-0
-                   file:bg-primary file:text-white
-                   hover:file:bg-primary/90 cursor-pointer"
-        />
-    </div>
-</div>
-        <from action="" method="post" class="bg-[#231a2e] rounded-xl border border-[#362447] p-6 flex flex-col gap-5">
+                    <input
+                        type="file"
+                        name="image"
+                        accept="image/*"
+                        class="block w-full text-sm text-text-muted
+                               file:mr-4 file:py-2 file:px-4
+                               file:rounded-lg file:border-0
+                               file:bg-primary file:text-white
+                               hover:file:bg-primary/90 cursor-pointer"
+                    />
+                </div>
+            </div>
 
             <div>
                 <label class="font-medium">Name</label>
                 <input
                     type="text"
+                    name="name"
                     placeholder="Your name"
                     class="mt-1 w-full h-12 rounded-lg bg-input-dark border-none text-white placeholder:text-text-muted focus:ring-2 focus:ring-primary"
                 />
@@ -85,6 +100,7 @@
                 <label class="font-medium">Email</label>
                 <input
                     type="email"
+                    name="email"
                     placeholder="Your email"
                     class="mt-1 w-full h-12 rounded-lg bg-input-dark border-none text-white placeholder:text-text-muted focus:ring-2 focus:ring-primary"
                 />
@@ -93,31 +109,21 @@
             <div>
                 <label class="font-medium">Password</label>
                 <input
+                    name="password"
                     type="password"
                     placeholder="Password"
                     class="mt-1 w-full h-12 rounded-lg bg-input-dark border-none text-white placeholder:text-text-muted focus:ring-2 focus:ring-primary"
                 />
             </div>
 
-            <div>
-                <label class="font-medium">Confirm Password</label>
-                <input
-                    type="password"
-                    placeholder="Confirm password"
-                    class="mt-1 w-full h-12 rounded-lg bg-input-dark border-none text-white placeholder:text-text-muted focus:ring-2 focus:ring-primary"
-                />
-            </div>
-
-            <button class="h-12 rounded-lg bg-primary hover:bg-primary/90 font-bold transition">
+            <button type="submit" class="h-12 rounded-lg bg-primary hover:bg-primary/90 font-bold transition">
                 Register
             </button>
-        </from>
-
-        
+        </form>
 
         <p class="text-center text-text-muted text-sm">
             Already have an account?
-            <a href="#" class="text-primary font-semibold hover:underline">Login</a>
+            <a href="/login" class="text-primary font-semibold hover:underline">Login</a>
         </p>
 
     </div>

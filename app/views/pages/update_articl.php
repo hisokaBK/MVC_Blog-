@@ -39,14 +39,12 @@
 
 <?php  require __DIR__ . '/../layouts/header.temp.php' ?>
 
-
 <main class="flex-1 flex justify-center py-10 px-4 md:px-10 lg:px-40">
 <?php if (isset($_SESSION['error'])): ?>
     <div class="text-red-400 font-medium mb-4 fixed">
         <?= $_SESSION['error']; ?>
     </div>
 <?php  endif; ?>
-
 <div class="w-full max-w-[960px] flex flex-col gap-6">
 <div class="flex flex-wrap justify-between items-center gap-3 px-4">
 <div>
@@ -54,12 +52,14 @@
 <p class="text-[#ad93c8] text-sm mt-1">Share your knowledge with the team</p>
 </div>
 </div>
-<form method="post" action='new_blog' class="flex flex-col gap-6 p-4" enctype="multipart/form-data">
+
+<form method="post" action='/update_blog' class="flex flex-col gap-6 p-4" enctype="multipart/form-data">
 
 <div class="flex flex-col gap-2">
     <label class="text-white text-base font-medium leading-normal">Article Title</label>
     <input
         name="title"
+        value="<?= $data['blog']->title ?>"
         class="form-input w-full rounded-lg text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-[#4d3465] bg-[#261a32] focus:border-primary h-14 placeholder:text-[#ad93c8] px-[15px] text-base font-normal leading-normal transition-all"
         placeholder="Enter a catchy title..."
         type="text"
@@ -75,9 +75,7 @@
             class="form-select w-full rounded-lg text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-[#4d3465] bg-[#261a32] focus:border-primary h-14 px-[15px] text-base font-normal leading-normal transition-all appearance-none"
         >
             <option disabled selected value="">Select a category</option>
-            <option value="1">Engineering</option>
-            <option value="2">Design</option>
-            <option value="3">Marketing</option>
+            <option <?=($data['blog']->categorie_id==1)?'selected':''?> value="1">Engineering</option>
         </select>
     </div>
 
@@ -85,10 +83,8 @@
         <label class="text-white text-base font-medium leading-normal">Article Photo</label>
 
         <div class="w-full h-40 rounded-lg border border-[#4d3465] bg-[#261a32] overflow-hidden flex items-center justify-center">
-            <img id="imagePreview" class="hidden w-full h-full object-cover">
-            <span id="imagePlaceholder" class="text-[#ad93c8] text-sm">
-                No image selected
-            </span>
+            <img src="../<?= $data['blog']->photo ?>" id="imagePreview" class=" w-full h-full object-cover">
+            
         </div>
 
         <input
@@ -109,13 +105,16 @@
     <label class="text-white text-base font-medium leading-normal">Content</label>
     <textarea
         name="content"
+
         class="form-textarea w-full rounded-lg text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-[#4d3465] bg-[#261a32] focus:border-primary min-h-[400px] placeholder:text-[#ad93c8] p-[15px] text-base font-normal leading-normal resize-y transition-all"
         placeholder="Start writing your article here..."
-    ></textarea>
+    ><?= $data['blog']->content ?></textarea>
 </div>
+    <input type="hidden" name="id" value="<?= $data['blog']->id ?>">
+    <input type="hidden" name="image" value="<?= $data['blog']->photo ?>">
 
-  <button type="submit" class="h-12 rounded-lg bg-primary hover:bg-primary/90 font-bold transition">
-                Save new blog
+  <button type="submit"  class="h-12 rounded-lg bg-primary hover:bg-primary/90 font-bold transition">
+                Updete this blog
     </button>
 
 </form>

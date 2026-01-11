@@ -6,7 +6,7 @@ use app\core\controller;
 class HomeController extends controller{
     public function index(){
         $this->view('home', [
-            'title' => 'Welcome to Mini MVC'
+            'title' => 'Welcome to blog home'
         ]);
     }
 }
