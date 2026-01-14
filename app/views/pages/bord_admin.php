@@ -11,6 +11,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
 
 <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<link rel="stylesheet" href="../assets/styles/style2.css">
+
 
 <script>
 tailwind.config = {

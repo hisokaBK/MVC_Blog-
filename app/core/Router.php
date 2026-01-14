@@ -26,7 +26,10 @@ class Router
             $controller = new $controllerClass();
             $controller->$methodName();
             return;
-        }
+       }else{
+            header('Location: /404');
+            exit();
+       }
 
         $controllerClass = "app\\Controllers\\NotFoundController";
         $controller = new $controllerClass();

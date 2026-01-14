@@ -108,7 +108,7 @@
 <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-6">Discussion</h3>
 <div class="flex gap-4 mb-10">
 <div class="shrink-0 hidden sm:block">
-<div class="size-10 rounded-full bg-cover bg-center" data-alt="Current user avatar" style='background-image: url("../<?= isset($_SESSION['user'])?$_SESSION['user']->photo:'assets/images/defulteImg.png' ?> ");'>
+<div class="size-10 rounded-full bg-cover bg-center" data-alt="Current user avatar" style='background-image: url("../<?= isset($_SESSION['user'])?$_SESSION['user']->photo:'assets/images/defulteImg1.jpg' ?> ");'>
 </div>
 </div>
 <div class="flex-grow">

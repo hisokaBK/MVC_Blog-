@@ -9,6 +9,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link rel="stylesheet" href="../assets/styles/style2.css">
+
 <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -30,22 +32,7 @@
             },
         }
     </script>
-<style>
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #191121; 
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #4d3465; 
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #7317cf; 
-        }
-    </style>
+
 </head>
 <?php  
 

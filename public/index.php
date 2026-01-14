@@ -52,5 +52,7 @@ $router->post('/commenter', "CommenterController@commenter");
 
 $router->get('/about', "AboutController@aboutView");
 
+$router->get('/404', "NotFondController@notFondView");
+
 $router->dispatch();
 if(isset($_SESSION['error']))unset($_SESSION['error']);

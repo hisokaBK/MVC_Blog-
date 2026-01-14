@@ -30,13 +30,17 @@ class OneArticlController extends controller{
            $articl= new Article($articl['id'],$articl['user_id'],$articl['categorie_id'],$articl['title'], $articl['photo'],$articl['content'],$articl['created_at'],$articl['updated_at']);
 
             $userlike ;
-           $prepareChekLike = $connx->prepare("SELECT * FROM likes 
-           WHERE user_id = ? and article_id = ? ");
-           $prepareChekLike->execute([$_SESSION['user']->id ,$_GET['id']]);
-           $prepareChekLike->fetch();
-           if($prepareChekLike){
-              $userlike=true ;
-           }else{$userlike=false ;}
+            if(isset($_SESSION['user'])){
+                $prepareChekLike = $connx->prepare("SELECT * FROM likes 
+                WHERE user_id = ? and article_id = ? ");
+                $prepareChekLike->execute([$_SESSION['user']->id ,$_GET['id']]);
+                $prepareChekLike->fetch();
+                if($prepareChekLike){
+                    $userlike=true ;
+                    }else{$userlike=false ;}
+            }else{
+                   $userlike=false ;
+            }
 
             
            $categories_prepare =$connx-> prepare("SELECT c.* FROM categories c 
