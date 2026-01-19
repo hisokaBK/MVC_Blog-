@@ -52,7 +52,7 @@ class OneArticlController extends controller{
           $categorie = new Category($categorie['id'],$categorie['name'],$categorie['created_at'],$categorie['updated_at']);
 
 
-          //hna kan7sab number dyal like o comment lhad lblog
+          //hna kan7sab number dyal like o comment lhad lblog------------------
 
         $numberLiks_prepare =$connx-> prepare("SELECT a.id,COUNT(l.user_id) AS numLike
                FROM articles a  
@@ -62,6 +62,8 @@ class OneArticlController extends controller{
                GROUP BY a.id ;");
           $numberLiks_prepare->execute([$_GET['id']]);
           $likes=$numberLiks_prepare->fetch();
+
+          //hna numbor comments par articl------------
 
         $numberComments_prepare = $connx->prepare("SELECT a.id AS article_id,
                  COUNT(c.id) AS numComment
@@ -74,10 +76,6 @@ class OneArticlController extends controller{
         $numberComments_prepare->execute([$_GET['id']]);
         $commentsCount=$numberComments_prepare->fetch();
 
-        //   select * from  where article_id = 6
-        //   select u.* from commentaires c join users u 
-        //     on u.id = c.user_id join articles a 
-        //   on a.id=c.article_id where a.id = 6;
         
         $prepareComments =$connx->prepare(
             "SELECT * FROM commentaires WHERE article_id = ? ORDER BY created_at DESC"
@@ -95,7 +93,7 @@ class OneArticlController extends controller{
         }
         
         $prepareUserComments =$connx->prepare(
-            "SELECT u.* FROM commentaires c 
+            "SELECT u.* , c.id as commentair_ID FROM commentaires c 
             JOIN  users u 
             ON u.id = c.user_id JOIN articles a 
           ON a.id=c.article_id WHERE a.id = ? 
@@ -103,6 +101,19 @@ class OneArticlController extends controller{
         );
         $prepareUserComments->execute([$_GET['id']]);
         $UserComments =[];
+
+        $numberLikesComents=[];
+        $prepareCommentLikes = $connx->prepare("
+                                    SELECT 
+                                        c.id ,
+                                        COUNT(cl.user_id) AS numLike
+                                    FROM commentaires c
+                                    LEFT JOIN comment_likes cl 
+                                        ON cl.commentaire_id = c.id
+                                    WHERE c.article_id = ? and c.id = ?
+                                    GROUP BY c.id
+                                ");
+
         foreach($prepareUserComments->fetchAll() as $user){
                   $id=$user['id'];
                   $name=$user['name'];
@@ -112,17 +123,27 @@ class OneArticlController extends controller{
                   $role=$user['role'];
                   $is_active=$user['is_active'];
                   $created_at=$user['created_at'];
+                  $commentair_ID=$user['commentair_ID'];
                   
                   
                   if($role=="AUTHOR"){
+
                     $UserComments =[...$UserComments , new Author($id,$name,$email,$photo,$password,$role,$is_active,$created_at)];
+
                     }elseif($role=="ADMIN"){
+
                         $UserComments =[...$UserComments , new Admin($id,$name,$email,$photo,$password,$role,$is_active,$created_at)];
+
                     }
                     else{
+
                     $UserComments =[...$UserComments , new Reader($id,$name,$email,$photo,$password,$role,$is_active,$created_at)];
+
                 }
 
+             $prepareCommentLikes->execute([$_GET['id'],$commentair_ID]);
+             $likex=$prepareCommentLikes->fetchAll() ;
+             $numberLikesComents=[...$numberLikesComents, $likex[0]['numLike']];
         }
 
 
@@ -133,7 +154,8 @@ class OneArticlController extends controller{
              "likes"=>$likes,
              'comments'=>[$UserComments,$comments],
              "commentsCount"=>$commentsCount,
-             'userlike'=>$userlike
+             'userlike'=>$userlike,
+             'numberLikesComents'=>$numberLikesComents
         ];
 
 
@@ -143,24 +165,6 @@ class OneArticlController extends controller{
             ]);
     } 
 
-    // public function one_articl2(){
-    //     $this->view('one_articl', [
-    //         'title' => 'one Blog page ' ,
-    //         'elementsBlog'=>[
-    //             'id'=>$_GET['id'],
-    //             'name'=>$_GET['name'],
-    //             'creacte_at'=>$_GET['creacte_at'],
-    //             'photoUser'=>$_GET['photoUser'],
-    //             'category'=>$_GET['category'],
-    //             'title'=>$_GET['title'],
-    //             "photoArticl"=>$_GET['photoArticl']
-    //             ,'description'=>$_GET['description']
-    //             ,'numberLike'=>$_GET['numberLike']
-    //             ,'numberComments'=>$_GET['numberComments']
-    //             ,'liked'=>$_GET['liked']
-    //             ]
-    //         ]);
-    // } 
 }
 
 ?>

@@ -31,4 +31,23 @@ class BanController extends Controller{
                 header("Location: /bord_admin");
                 exit();
           }
+
+           public function CommentBan(){
+                            if (!isset($_SESSION['user']) ) {
+                                header('Location: /login');
+                                exit();
+                            }
+                    
+                            $connx = Database::getConnection();
+                  
+                        $insert = $connx->prepare(
+                                    "INSERT INTO bans (user_id, reason) VALUES (?, ?)"
+                                );
+                         $insert->execute([ $_GET['user_id'],'Banned from comments']);
+                            
+                            header('Location: ' . $_SERVER['HTTP_REFERER']);
+                            exit();
+             }
+                    
+                    
 }

@@ -31,8 +31,5 @@ class Router
             exit();
        }
 
-        $controllerClass = "app\\Controllers\\NotFoundController";
-        $controller = new $controllerClass();
-        $controller->index();
     }
 }

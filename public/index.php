@@ -43,9 +43,13 @@ $router->get('/deleteCategory', "CategoryController@deleteCategory");
 $router->get('/ban', "BanController@ban");
 $router->get('/unban', "BanController@unban");
 
+$router->get('/comentBan', "BanController@CommentBan");
+
 $router->get('/one_blog', "OneArticlController@one_articl");
 
 $router->get('/like', "LikeController@like");
+
+$router->get('/likecomment', "ComntLikeController@like");
 
 $router->post('/commenter', "CommenterController@commenter");
 

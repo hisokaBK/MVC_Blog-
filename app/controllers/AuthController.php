@@ -7,7 +7,6 @@ use app\models\Category;
 use app\models\Author;
 use app\models\Admin;
 use app\models\Reader;
-
 use app\core\Database;
 
 class AuthController extends Controller{
@@ -19,7 +18,6 @@ class AuthController extends Controller{
 
  public static function register(){
     $conn = Database::getConnection();
-
     $name     = htmlspecialchars(trim($_POST['name']));
     $email    = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
     $password = $_POST['password'];
@@ -58,7 +56,7 @@ class AuthController extends Controller{
             $uploadDir . $imageName
         );
 
-        $imagePath = "assets/images" . $imageName;
+        $imagePath = "assets/images/" . $imageName;
     }
 
     $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
@@ -107,28 +105,29 @@ public function login(){
 
         $user = $stmt->fetch();
 
-        if ($user && (password_verify($password, $user['password']) || $password==$user['password'] )) {
-            $_SESSION['flash_welcome'] = "Welcome <b>" . $_SESSION['user']->name . "</b>";
+        if ($user && (password_verify($password, $user['password']) || $password==$user['password'] ))
+        {
+            if(!$user['is_active']){
+                header('Location: /404');
+                $_SESSION['error'] = "Vous n’avez plus l’autorisation d’accéder à nos services";
+                exit();  
+            }
+
+            $_SESSION['flash_welcome'] = "Welcome <b>" . $user['name'] . "</b>";
              
             if($user['role']=='READER'){
                 $_SESSION['user'] = new Reader($user['id'],$user['name'],$user['email'],$user['photo'],$user['password'],$user['role'],$user['is_active'],$user['created_at'],$user['updated_at']);
-
-                $_SESSION['users']=[];
 
                 header('Location: /');
                 exit();
       
             }elseif($user['role']=='AUTHOR'){
                  $_SESSION['user'] = new Author($user['id'],$user['name'],$user['email'],$user['photo'],$user['password'],$user['role'],$user['is_active'],$user['created_at'],$user['updated_at']);
-
-                $_SESSION['users']=[];
                 header('Location: /bord_author');
                 exit();
 
             }else{
                 $_SESSION['user'] = new Admin($user['id'],$user['name'],$user['email'],$user['photo'],$user['password'],$user['role'],$user['is_active'],$user['created_at'],$user['updated_at']);
-
-                $_SESSION['users']=[];
 
                 header('Location: /bord_admin');
                 exit();              

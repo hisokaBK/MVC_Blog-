@@ -2,7 +2,6 @@
 
 namespace app\controllers;
 use app\models\Like;
-
 use app\core\Database;
 
 class LikeController {

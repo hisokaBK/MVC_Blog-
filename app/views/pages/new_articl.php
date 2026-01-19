@@ -74,10 +74,10 @@
             name="categorie_id"
             class="form-select w-full rounded-lg text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-[#4d3465] bg-[#261a32] focus:border-primary h-14 px-[15px] text-base font-normal leading-normal transition-all appearance-none"
         >
-            <option disabled selected value="">Select a category</option>
-            <option value="1">Engineering</option>
-            <option value="2">Design</option>
-            <option value="3">Marketing</option>
+        <option disabled selected value="">Select a category</option>
+           <?php foreach($data['all_categories'] as $category): ?>
+            <option value="<?= $category->id?>"><?= $category->name ?></option>
+            <?php endforeach;?>
         </select>
     </div>
 

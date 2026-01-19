@@ -149,10 +149,18 @@
                                <?= $data['elementBlog']['comments'][1][$i]->content ?>
                             </p>
 <div class="flex items-center gap-4 mt-2">
-<button class="text-xs font-medium text-primary flex items-center gap-1 transition-colors">
+<a href="/likecomment?comment_id=<?= $data['elementBlog']['comments'][1][$i]->id?>&&article_id=<?= $data['elementBlog']['articl']->id ?>
+       " class="text-xs font-medium text-primary flex items-center gap-1 transition-colors">
 <span class="material-symbols-outlined text-[16px] fill-1">thumb_up</span>
-                                    3 Likes
-                    </button>
+                                    <?=$data['elementBlog']['numberLikesComents'][$i]?> Likes
+</a>
+
+<a href="/comentBan?user_id=<?= $data['elementBlog']['comments'][0][$i]->id?>"
+   class="text-xs font-medium text-red-400/50 hover:text-red-400 flex items-center gap-1 transition-colors">
+    <span class="material-symbols-outlined text-[16px] fill-1">block</span>
+    Ban
+</a>
+
 
 </div>
 </div>

@@ -64,6 +64,7 @@
 <h1 class="text-gray-900 dark:text-white tracking-tight text-[32px] md:text-[48px] font-extrabold leading-tight">
                 404 - Page Not Found
             </h1>
+            <p><?php  echo isset($_SESSION['error'])?"<p class='text-red-500 border border-red-400 rounded-lg py-2 px-4'>{$_SESSION['error']}</p>":'' ?></p>
 <p class="text-gray-600 dark:text-gray-400 text-lg font-normal leading-relaxed px-4">
                 Hisoka seems to have pulled a trick—it looks like you've taken a wrong turn. 
                 Don't worry, the community is just one click away.

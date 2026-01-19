@@ -27,7 +27,7 @@ class ArticleController extends controller{
                    $authorId  = $articl['created_at'];
                    $createdAt  = $articl['updated_at'];
 
-                    //hadi dartha bach nchof wach user dayar like lchi post --------------
+                    //hadi dartha bach nchof wach user dayar like lchi post ------hisoka sama--------
                    if(isset($_SESSION['user'])){
                         $prepareChekLike = $connx->prepare("SELECT * FROM likes WHERE user_id = ? and article_id = ? ");
                      $prepareChekLike->execute([$_SESSION['user']->id ,$id]);
@@ -42,7 +42,7 @@ class ArticleController extends controller{
                         $userlike=[...$userlike,false];
                     }
 
-                     //--------------------------
+                     //--------------------------------
 
                    $articls = [...$articls ,new Article($id,$user_id,$categorie_id,$title, $photo,$content,$authorId,$createdAt)];
           }
@@ -60,8 +60,9 @@ class ArticleController extends controller{
           }
 
 
-          $user_prepare =$connx-> prepare("SELECT s.* FROM users s  JOIN articles a 
-   ON s.id = a.user_id ;");
+          $user_prepare =$connx-> prepare("SELECT s.* FROM users s  
+                                               JOIN articles a 
+                                                   ON s.id = a.user_id ;");
           $user_prepare->execute();
           $users=[];
          
@@ -134,8 +135,20 @@ class ArticleController extends controller{
     }
 
   public function addarticlView(){
+
+         $connx = Database::getConnection();
+         $categories_All_prepare =$connx-> prepare("SELECT * FROM categories ");
+          $categories_All_prepare->execute();
+          $all_categories =[];
+          foreach($categories_All_prepare->fetchAll() as $categorie){
+                  $id_cat=$categorie['id'];
+                  $name=$categorie['name'];
+                  $created_at = $categorie['created_at'];
+                  $update_at = $categorie['updated_at'];
+                  $all_categories =[...$all_categories , new Category($id_cat,$name, $created_at,$update_at)];
+          }
         $this->view('new_articl', [
-            'title' => 'add _ blog '
+            'title' => 'add _ blog ' ,'all_categories'=>$all_categories
         ]);
   }
 
@@ -212,6 +225,7 @@ public function removeArticle(){
       header('Location: bord_author');
       exit();
   }
+
   public function updateArticleView(){
       $id=$_GET['id'];
       $conn = Database::getConnection();
@@ -234,6 +248,8 @@ public function removeArticle(){
     ]);  
   }
 
+
+  
 public function updateArticle(){
     $conn = Database::getConnection();
 

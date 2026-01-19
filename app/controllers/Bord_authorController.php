@@ -51,8 +51,7 @@ class Bord_authorController extends controller{
                   $categories =[...$categories , new Category($id_cat,$name, $created_at,$update_at)];
           }
 
-
-          $user_prepare =$connx-> prepare("SELECT s.* FROM users s  JOIN articles a 
+        $user_prepare =$connx-> prepare("SELECT s.* FROM users s  JOIN articles a 
    ON s.id = a.user_id where a.user_id =?;");
           $user_prepare->execute([$_SESSION['user']->id]);
           $users=[];
@@ -95,6 +94,8 @@ class Bord_authorController extends controller{
             'numeLikes'=>$numeLikes,
             'numberBlogs'=>$numberBlogs,
             'numberComents'=>$numberComents
+            
+
         ]);
     }
 }
