@@ -53,7 +53,7 @@
 <?php endforeach; ?>
 
 </nav>
-<div class="my-6 border-t border-slate-200 dark:border-border-dark"></div>
+<!--<div class="my-6 border-t border-slate-200 dark:border-border-dark"></div>
 <h2 class="mb-4 px-3 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                 Trending Tags
             </h2>
@@ -62,7 +62,7 @@
 <a class="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600 hover:bg-slate-200 dark:bg-surface-dark dark:text-slate-300 dark:hover:bg-surface-dark-hover border border-slate-200 dark:border-border-dark" href="#">#typescript</a>
 <a class="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600 hover:bg-slate-200 dark:bg-surface-dark dark:text-slate-300 dark:hover:bg-surface-dark-hover border border-slate-200 dark:border-border-dark" href="#">#figma</a>
 <a class="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600 hover:bg-slate-200 dark:bg-surface-dark dark:text-slate-300 dark:hover:bg-surface-dark-hover border border-slate-200 dark:border-border-dark" href="#">#offsite</a>
-</div>
+</div> -->
 </aside>
 <main class="flex min-w-0 flex-1 flex-col gap-6">
 <div class="flex lg:hidden overflow-x-auto pb-2 -mx-4 px-4 gap-2 scrollbar-hide">

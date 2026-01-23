@@ -109,7 +109,7 @@ public function login(){
         {
             if(!$user['is_active']){
                 header('Location: /404');
-                $_SESSION['error'] = "Vous n’avez plus l’autorisation d’accéder à nos services";
+                $_SESSION['error'] = "Vous n'avez plus l'autorisation d'accéder à nos services";
                 exit();  
             }
 
